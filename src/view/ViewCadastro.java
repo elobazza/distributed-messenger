@@ -1,6 +1,11 @@
 package view;
 
+import controller.ControllerCadastroUsuario;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * @author Eloisa e Maria Eduarda 
@@ -48,6 +53,11 @@ public class ViewCadastro extends javax.swing.JFrame {
 
         btCadastrar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btCadastrar.setText("Cadastrar");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadastrarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel6.setText("Username:");
@@ -111,6 +121,30 @@ public class ViewCadastro extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        this.validaCampos();
+        if(tfSenha.getText().equalsIgnoreCase(tfConfirmaSenha.getText())) {
+            String nome     = tfNomeCompleto.getText();
+            String username = tfUsername.getText();
+            String email    = tfEmail.getText();
+            String senha    = tfSenha.getText();
+            
+            try {
+                new ControllerCadastroUsuario().cadastrar(nome, username, email, senha);
+            } catch (IOException ex) {
+                Logger.getLogger(ViewCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "As senhas não estão iguais, verifique!");
+        }
+    }//GEN-LAST:event_btCadastrarActionPerformed
+
+    
+    public void validaCampos() {
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
     private javax.swing.JLabel jLabel1;

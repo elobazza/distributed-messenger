@@ -11,6 +11,7 @@ public class ViewLogin extends javax.swing.JFrame {
     public ViewLogin() {
         initComponents();
         this.getContentPane().setBackground(Color.white);
+//        this.getContentPane().setBackground(new Color(242, 236, 228));
     }
     
     @SuppressWarnings("unchecked")
@@ -38,6 +39,11 @@ public class ViewLogin extends javax.swing.JFrame {
 
         btLogin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btLogin.setText("Login");
+        btLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLoginActionPerformed(evt);
+            }
+        });
 
         btCadastro.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btCadastro.setText("Cadastre-se");
@@ -93,6 +99,10 @@ public class ViewLogin extends javax.swing.JFrame {
     private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastroActionPerformed
         new ViewCadastro().setVisible(true);
     }//GEN-LAST:event_btCadastroActionPerformed
+
+    private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
+        new ViewTelaPrincipal().setVisible(true);
+    }//GEN-LAST:event_btLoginActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
