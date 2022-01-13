@@ -132,6 +132,8 @@ public class ViewCadastro extends javax.swing.JFrame {
             
             try {
                 new ControllerCadastroUsuario().cadastrar(nome, username, email, senha);
+                new ViewTelaPrincipal().setVisible(true);
+                this.setVisible(false);
             } catch (IOException ex) {
                 Logger.getLogger(ViewCadastro.class.getName()).log(Level.SEVERE, null, ex);
             }

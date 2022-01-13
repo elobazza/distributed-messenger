@@ -1,7 +1,12 @@
 
 package view;
 
+import controller.ControllerLoginUsuario;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * @author Eloisa e Maria Eduarda
@@ -101,7 +106,19 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadastroActionPerformed
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
-        new ViewTelaPrincipal().setVisible(true);
+        String username = tfLogin.getText();
+        String senha    = tfSenha.getText();
+        
+        try {
+            boolean logou = new ControllerLoginUsuario().login(username, senha);
+            if(logou) {
+                new ViewTelaPrincipal().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Username ou senha incorretos! :C");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btLoginActionPerformed
 
     public static void main(String args[]) {
