@@ -123,30 +123,29 @@ public class ViewCadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        this.validaCampos();
         if(tfSenha.getText().equalsIgnoreCase(tfConfirmaSenha.getText())) {
             String nome     = tfNomeCompleto.getText();
             String username = tfUsername.getText();
             String email    = tfEmail.getText();
             String senha    = tfSenha.getText();
             
-            try {
-                new ControllerCadastroUsuario().cadastrar(nome, username, email, senha);
-                new ViewTelaPrincipal().setVisible(true);
-                this.setVisible(false);
-            } catch (IOException ex) {
-                Logger.getLogger(ViewCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            if(nome.equals("") || username.equals("") || email.equals("") || senha.equals("")) {
+                JOptionPane.showMessageDialog(rootPane, "Por favor, preencha todos os campos!");
+            }
+            else {
+                try {
+                    new ControllerCadastroUsuario().cadastrar(nome, username, email, senha);
+                    new ViewTelaPrincipal().setVisible(true);
+                    this.setVisible(false);
+                } catch (IOException ex) {
+                    Logger.getLogger(ViewCadastro.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "As senhas não estão iguais, verifique!");
         }
     }//GEN-LAST:event_btCadastrarActionPerformed
-
-    
-    public void validaCampos() {
-        
-    }
-    
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
     private javax.swing.JLabel jLabel1;

@@ -109,16 +109,22 @@ public class ViewLogin extends javax.swing.JFrame {
         String username = tfLogin.getText();
         String senha    = tfSenha.getText();
         
-        try {
-            boolean logou = new ControllerLoginUsuario().login(username, senha);
-            if(logou) {
-                new ViewTelaPrincipal().setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Username ou senha incorretos! :C");
+        if(username.equals("") || senha.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Ops! Falta informar alguma coisa :P");
+        } else {
+            try {
+                boolean logou = new ControllerLoginUsuario().login(username, senha);
+                if(logou) {
+                    new ViewTelaPrincipal().setVisible(true);
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Username ou senha incorretos! :C");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btLoginActionPerformed
 
     public static void main(String args[]) {

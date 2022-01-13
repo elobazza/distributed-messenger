@@ -14,6 +14,14 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         this.pnFotinho.setBackground(new Color(201, 179, 153));
         this.pnChatAtivo.setBackground(Color.white);
         
+        if(true) {
+            pnFotinho.setVisible(false);
+            pnChatAtivo.setVisible(false);
+            lbNome.setVisible(false);
+            tfNovaMensagem.setVisible(false);
+            btEnviar.setVisible(false);
+        }
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -185,7 +193,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionaActionPerformed
-        // TODO add your handling code here:
+        new ViewBuscaAmizade().setVisible(true);
     }//GEN-LAST:event_btAdicionaActionPerformed
 
     private void btRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoveActionPerformed
