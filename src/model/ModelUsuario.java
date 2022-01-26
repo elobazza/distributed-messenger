@@ -7,32 +7,25 @@ import java.util.HashMap;
  */
 public class ModelUsuario {
     
-    private int    id;
     private String nome;
     private String username;
     private String email;
     private String senha;
+    
+    private String ip;
     
     private boolean online;
     private HashMap<String, ModelUsuario> amigos;
 
     public ModelUsuario() {}
 
-    public ModelUsuario(String nome, String username, String email, String senha) {
-//        this.id = id;
-        this.nome = nome;
+    public ModelUsuario(String nome, String username, String email, String senha, String ip) {
+        this.nome     = nome;
         this.username = username;
-        this.email = email;
-        this.senha = senha;
-        this.amigos = new HashMap<String, ModelUsuario>();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.email    = email;
+        this.senha    = senha;
+        this.ip       = ip;
+        this.amigos   = new HashMap<String, ModelUsuario>();
     }
 
     public String getNome() {
@@ -65,6 +58,14 @@ public class ModelUsuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public boolean isOnline() {

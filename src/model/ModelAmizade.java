@@ -5,39 +5,29 @@ package model;
  */
 public class ModelAmizade {
     
-    private int          id;
-    private ModelUsuario usuario;
-    private ModelUsuario amigo;
-
+    private String nome;
+    private String ip;
+    
     public ModelAmizade() {}
 
-    public ModelAmizade(ModelUsuario usuario, ModelUsuario amigo) {
-//        this.id = id;
-        this.usuario = usuario;
-        this.amigo = amigo;
+    public ModelAmizade(String nome, String ip) {
+        this.nome = nome;
+        this.ip = ip;
     }
 
-    public int getId() {
-        return id;
+    public String getNome() {
+        return nome;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public ModelUsuario getUsuario() {
-        return usuario;
+    public String getIp() {
+        return ip;
     }
 
-    public void setUsuario(ModelUsuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public ModelUsuario getAmigo() {
-        return amigo;
-    }
-
-    public void setAmigo(ModelUsuario amigo) {
-        this.amigo = amigo;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

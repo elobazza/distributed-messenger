@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistencia;
 
 import java.io.BufferedReader;
@@ -18,26 +13,42 @@ import java.io.IOException;
  */
 public class PersistenciaAmizadePadrao {
 
+    protected File arquivo = new File("src/database/amizades.txt");
+    
+    private FileReader leitorArq;
+    private FileWriter gravadorArq;
+    
     private BufferedReader leitor;
     private BufferedWriter gravador;
     
-    public PersistenciaAmizadePadrao() throws FileNotFoundException, IOException {
-        File arquivo = new File("../database/amizades.txt");
-        
-        FileReader leitorArq   = new FileReader(arquivo);
-        FileWriter gravadorArq = new FileWriter(arquivo);
-        
-        leitor   = new BufferedReader(leitorArq);
-        gravador = new BufferedWriter(gravadorArq);
+
+    public void iniciaLeitor() throws FileNotFoundException {
+        leitorArq = new FileReader(arquivo);
+        leitor    = new BufferedReader(leitorArq);
     }
 
-    public BufferedReader getLeitor() {
-        return leitor;
-    }
-
-    public BufferedWriter getGravador() {
-        return gravador;
-    }   
+    public void iniciaGravador() throws IOException {
+        gravadorArq = new FileWriter(arquivo);
+        gravador    = new BufferedWriter(gravadorArq);
+    }  
     
+    public BufferedReader getLeitor() {
+        return this.leitor;
+    }
+    
+    public BufferedWriter getGravador() {
+        return this.gravador;
+    }
+    
+    public void encerraLeitor() throws IOException {
+        this.leitor.close();
+        this.leitorArq.close();
+    }
+    
+    public void encerraGravador() throws IOException {
+        this.gravador.newLine();
+        this.gravador.close();
+        this.gravadorArq.close();
+    }   
     
 }

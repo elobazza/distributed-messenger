@@ -27,13 +27,9 @@
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfUsername" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
+                          <Component id="tfIP" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
                           <Component id="lbNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -41,6 +37,10 @@
                           <Component id="btAdicionar" min="-2" pref="86" max="-2" attributes="0"/>
                           <Component id="btBuscar" min="-2" pref="86" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="84" max="32767" attributes="0"/>
@@ -66,7 +66,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btBuscar" max="32767" attributes="0"/>
-                          <Component id="tfUsername" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="tfIP" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="68" max="32767" attributes="0"/>
                   </Group>
@@ -90,10 +90,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="* procure utilizando o username"/>
+        <Property name="text" type="java.lang.String" value="* procure utilizando o IP"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfUsername">
+    <Component class="javax.swing.JTextField" name="tfIP">
     </Component>
     <Component class="javax.swing.JButton" name="btBuscar">
       <Properties>

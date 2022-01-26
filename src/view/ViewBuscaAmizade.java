@@ -27,7 +27,7 @@ public class ViewBuscaAmizade extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfUsername = new javax.swing.JTextField();
+        tfIP = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
         btAdicionar = new javax.swing.JButton();
         lbNome = new javax.swing.JLabel();
@@ -36,7 +36,7 @@ public class ViewBuscaAmizade extends javax.swing.JFrame {
         jLabel1.setText("Encontre um novo amigo!");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel2.setText("* procure utilizando o username");
+        jLabel2.setText("* procure utilizando o IP");
 
         btBuscar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btBuscar.setText("Buscar");
@@ -67,17 +67,17 @@ public class ViewBuscaAmizade extends javax.swing.JFrame {
                         .addGap(130, 130, 130)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfIP, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbNome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btAdicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel2)))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -97,7 +97,7 @@ public class ViewBuscaAmizade extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfIP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 68, Short.MAX_VALUE)))
                 .addGap(46, 46, 46))
         );
@@ -110,22 +110,22 @@ public class ViewBuscaAmizade extends javax.swing.JFrame {
         lbNome.setVisible(false);
         btAdicionar.setVisible(false);
         
-        String username = tfUsername.getText();
+        String ip = tfIP.getText();
         
-        if(username.equals("")) {
-            JOptionPane.showMessageDialog(this, "Por favor, informe um username :D");
+        if(ip.equals("")) {
+            JOptionPane.showMessageDialog(this, "Por favor, informe um IP :D");
         } else {
             try {
-                ModelUsuario usuario = new ControllerBuscaUsuario().buscar(username);
+                new ControllerBuscaUsuario().buscar(ip);
                 
-                if(usuario != null) {
-                    lbNome.setVisible(true);
-                    btAdicionar.setVisible(true);
-                    lbNome.setText(usuario.getNome() + ": " + usuario.getUsername());
-                } else {
-                    lbNome.setVisible(true);
-                    lbNome.setText("Ops! Não encontrado :C");
-                }
+//                if(usuario != null) {
+//                    lbNome.setVisible(true);
+//                    btAdicionar.setVisible(true);
+//                    lbNome.setText(usuario.getNome() + ": " + usuario.getUsername());
+//                } else {
+//                    lbNome.setVisible(true);
+//                    lbNome.setText("Ops! Não encontrado :C");
+//                }
             } catch (IOException ex) {
                 Logger.getLogger(ViewBuscaAmizade.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -142,6 +142,6 @@ public class ViewBuscaAmizade extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbNome;
-    private javax.swing.JTextField tfUsername;
+    private javax.swing.JTextField tfIP;
     // End of variables declaration//GEN-END:variables
 }

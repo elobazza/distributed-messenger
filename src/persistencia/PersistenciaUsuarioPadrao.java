@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class PersistenciaUsuarioPadrao {
 
-    private File arquivo = new File("src/database/usuarios.txt");
+    private File arquivo = new File("src/database/usuario.txt");
     
     private FileReader leitorArq;
     private FileWriter gravadorArq;
