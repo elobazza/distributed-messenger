@@ -46,7 +46,6 @@ public class PersistenciaAmizadePadrao {
     }
     
     public void encerraGravador() throws IOException {
-        this.gravador.newLine();
         this.gravador.close();
         this.gravadorArq.close();
     }   

@@ -39,6 +39,10 @@ public class ViewLogin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel2.setText("Informe o Login:");
 
+        tfLogin.setText("elobazza");
+
+        tfSenha.setText("elo");
+
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel3.setText("Informe a Senha:");
 

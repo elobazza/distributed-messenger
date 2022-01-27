@@ -1,6 +1,5 @@
 package view;
 
-import controller.ControllerBatePapo;
 import controller.ControllerListaAmizades;
 import controller.ControllerRemoveAmizade;
 import java.awt.Color;
@@ -8,8 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import model.ModelAmizade;
 
 /**
@@ -17,7 +15,6 @@ import model.ModelAmizade;
  */
 public class ViewTelaPrincipal extends javax.swing.JFrame {
 
-//    private TableModelAmigos tableModel;
     private ListModelAmizade listModel = new ListModelAmizade();
     ArrayList<ModelAmizade> amizades;
             
@@ -36,7 +33,6 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
             btEnviar.setVisible(false);
         }
         
-//        this.atualizaTableModel(new TableModelAmigos());
         this.amizades = new ControllerListaAmizades().listar();
     }
     
@@ -55,6 +51,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         btRemove = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listAmigos = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,21 +147,40 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         listAmigos.setModel(new ListModelAmizade());
         listAmigos.setAutoscrolls(false);
         listAmigos.setFixedCellHeight(40);
+        listAmigos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listAmigosMouseClicked(evt);
+            }
+        });
+        listAmigos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listAmigosKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(listAmigos);
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setText("LISTA DE AMIGOS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btAdiciona, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btAdiciona, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)))
                 .addComponent(pnBatePapo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -174,8 +190,10 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(pnBatePapo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAdiciona, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,26 +211,47 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
 
     private void btRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoveActionPerformed
         String nomeRemover = listAmigos.getSelectedValue();
-        try {
-            new ControllerRemoveAmizade().removeAmizade(nomeRemover);
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(ViewTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                
-        atualizaTableModel(listModel);
         
+        if(nomeRemover == null) {
+            JOptionPane.showMessageDialog(rootPane, "Selecione alguém para fazer a remoção!");
+        }
+        else {
+            int opcao = JOptionPane.showConfirmDialog(rootPane, "Tem certeza que deseja remover "+ nomeRemover + "? :C", "Remover Amizade", 0);
+
+            if(opcao == 0) {
+                try {
+                    new ControllerRemoveAmizade().removeAmizade(nomeRemover);
+                    atualizaListModel(listModel);
+                } catch (IOException ex) {
+                    Logger.getLogger(ViewTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        }
     }//GEN-LAST:event_btRemoveActionPerformed
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btEnviarActionPerformed
+
+    private void listAmigosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listAmigosKeyPressed
+    }//GEN-LAST:event_listAmigosKeyPressed
+
+    private void listAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listAmigosMouseClicked
+        lbNome.setText(listAmigos.getSelectedValue());
+        
+        pnFotinho.setVisible(true);
+        pnChatAtivo.setVisible(true);
+        lbNome.setVisible(true);
+        tfNovaMensagem.setVisible(true);
+        btEnviar.setVisible(true);
+    }//GEN-LAST:event_listAmigosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdiciona;
     private javax.swing.JButton btEnviar;
     private javax.swing.JButton btRemove;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbNome;
     private javax.swing.JList<String> listAmigos;
@@ -222,18 +261,10 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField tfNovaMensagem;
     // End of variables declaration//GEN-END:variables
 
-    public void atualizaTable() {
-        
-    }
 
-    public void atualizaTableModel(ListModelAmizade listModelAmigos) {
+    public void atualizaListModel(ListModelAmizade listModelAmigos) {
         this.listModel = listModelAmigos;
         this.listAmigos.setModel(this.listModel);
     }
-
-//    public void atualizaListModel(ListModelAmizade listModelAmizade) {
-//        this.listAmigos = listModelAmizade;
-//        this.listAmigos.setModel(this.listModel);
-//    }
 
 }

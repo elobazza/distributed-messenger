@@ -84,8 +84,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfLogin">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="elobazza"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfSenha">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="elo"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
