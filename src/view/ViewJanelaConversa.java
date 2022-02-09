@@ -2,6 +2,8 @@ package view;
 
 import controller.ControllerConversa;
 import java.awt.Color;
+import java.util.ArrayList;
+import model.ModelAmizade;
 
 /**
  *
@@ -9,9 +11,8 @@ import java.awt.Color;
  */
 public class ViewJanelaConversa extends javax.swing.JFrame {
     
-    private ControllerConversa controller;
-    
-    private String[] mensagens;
+    private ListModelConversa listModel = new ListModelConversa();
+    ArrayList<String> mensagens;
     
     public ViewJanelaConversa(String nome) {
         initComponents();
@@ -19,6 +20,12 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
         this.pnChat.setBackground(Color.white);
         lbNome.setText(nome);
         
+        this.mensagens = ControllerConversa.getInstance().getMensagens();
+        
+    }
+    
+    public void atualizaListModel() {
+        this.chat.setModel(this.listModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -62,11 +69,7 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        chat.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {};
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        chat.setModel(new ListModelConversa());
         chat.setBackground(new Color(242, 236, 228));
         jScrollPane1.setViewportView(chat);
 
@@ -104,9 +107,11 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
         String novaMensagem = tfMensagem.getText();
+        ControllerConversa.getInstance().addMensagem(novaMensagem);
         
-                
-        chat.setListData(mensagens);
+        tfMensagem.setText("");
+        
+        atualizaListModel();
     }//GEN-LAST:event_btEnviarActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -16,7 +16,6 @@ public class PersistenciaRemoveAmizade extends PersistenciaAmizadePadrao {
     public void removeAmizade(String nome) throws IOException {
        
         this.iniciaLeitor();
-        //Cria Arquivo Temporario
         File tempFile = new File("src/database/tempfile.txt");
         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
         
@@ -36,7 +35,6 @@ public class PersistenciaRemoveAmizade extends PersistenciaAmizadePadrao {
         this.encerraLeitor();
         
         
-        /////
         this.iniciaGravador();
         BufferedReader reader = new BufferedReader(new FileReader(tempFile));
         

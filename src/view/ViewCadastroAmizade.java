@@ -116,7 +116,6 @@ public class ViewCadastroAmizade extends javax.swing.JFrame {
             else {
                 try {
                     new ControllerCadastroAmizade().cadastrar(nome, ip);
-//                    new ViewTelaPrincipal().setVisible(true);
                     this.telaFundo.atualizaListModel();
                     this.setVisible(false);
                 } catch (IOException ex) {
