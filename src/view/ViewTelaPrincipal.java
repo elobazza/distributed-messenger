@@ -158,7 +158,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAdicionaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionaActionPerformed
-        new ViewBuscaAmizade().setVisible(true);
+        new ViewCadastroAmizade(this).setVisible(true);
     }//GEN-LAST:event_btAdicionaActionPerformed
 
     private void btRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoveActionPerformed
@@ -173,7 +173,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
             if(opcao == 0) {
                 try {
                     new ControllerRemoveAmizade().removeAmizade(nomeRemover);
-                    atualizaListModel(listModel);
+                    atualizaListModel();
                 } catch (IOException ex) {
                     Logger.getLogger(ViewTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -209,8 +209,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-    public void atualizaListModel(ListModelAmizade listModelAmigos) {
-        this.listModel = listModelAmigos;
+    public void atualizaListModel() {
         this.listAmigos.setModel(this.listModel);
     }
 

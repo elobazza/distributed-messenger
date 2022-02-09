@@ -2,7 +2,6 @@ package view;
 
 import controller.ControllerConversa;
 import java.awt.Color;
-import java.util.ArrayList;
 
 /**
  *

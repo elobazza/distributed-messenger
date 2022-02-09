@@ -2,19 +2,21 @@ package persistencia;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
-import model.ModelAmizade;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import model.ModelAmizade;
 
 /**
  * @author Eloisa e Maria Eduarda
  */
-public class PersistenciaRemoveAmizade extends PersistenciaAmizadePadrao {
-    
-    public void removeAmizade(String nome) throws IOException {
-       
+public class PersistenciaCadastroAmizade extends PersistenciaAmizadePadrao {
+ 
+    public void cadastrar (String nome, String ip) throws IOException {
+        String retorno = nome + "-" + ip;
+        
+        
         this.iniciaLeitor();
         //Cria Arquivo Temporario
         File tempFile = new File("src/database/tempfile.txt");
@@ -24,14 +26,10 @@ public class PersistenciaRemoveAmizade extends PersistenciaAmizadePadrao {
         while(linha != null) {
             String[] infos = linha.split("-");
             ModelAmizade amizade = new ModelAmizade(infos[0], infos[1]);
-            if(!amizade.getNome().equals(nome)) {
-                writer.write(linha);
-                writer.newLine();
-            }
-            
+            writer.write(linha);
+            writer.newLine();
             linha = this.getLeitor().readLine(); 
         }
-        
         writer.close();
         this.encerraLeitor();
         
@@ -44,14 +42,13 @@ public class PersistenciaRemoveAmizade extends PersistenciaAmizadePadrao {
         while(linhaLeitura != null && !linhaLeitura.equals(" ")) {
                 this.getGravador().write(linhaLeitura);
                 linhaLeitura = reader.readLine(); 
-                if(linhaLeitura != null) {
-                    this.getGravador().newLine();
-                }
+                this.getGravador().newLine();
         }
+        
+        this.getGravador().write(retorno); // GRAVA NOVO REGISTRO
         
         reader.close();
         this.encerraGravador();
         
     }
-    
 }
