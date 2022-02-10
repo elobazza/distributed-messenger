@@ -7,16 +7,12 @@ import java.util.ArrayList;
  */
 public class ControllerConversa {
     
-    ArrayList<String> mensagens = new ArrayList<>();
-    
-    private static ControllerConversa instance = null;
-    
-    
-    public static ControllerConversa getInstance() {
-        if (instance == null) {
-            instance = new ControllerConversa();
-        }
-        return instance;
+    private ArrayList<String> mensagens;
+    private String ipContato;
+
+    public ControllerConversa(String ipContato) {
+        mensagens = new ArrayList<>();
+        this.ipContato = ipContato;
     }
     
     public void addMensagem(String mensagem) {

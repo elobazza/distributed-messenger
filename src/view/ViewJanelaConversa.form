@@ -110,8 +110,11 @@
       <SubComponents>
         <Component class="javax.swing.JList" name="chat">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Calibri" size="14" style="0"/>
+            </Property>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new ListModelConversa()" type="code"/>
+              <Connection code="new ListModelConversa(this.controller)" type="code"/>
             </Property>
           </Properties>
           <AuxValues>

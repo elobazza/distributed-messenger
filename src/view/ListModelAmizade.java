@@ -4,9 +4,7 @@ import controller.ControllerBatePapo;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
-import model.ModelAmizade;
 
 /**
  * @author Eloisa e Maria Eduarda

@@ -1,5 +1,6 @@
 package view;
 
+import controller.ControllerBuscaIp;
 import controller.ControllerListaAmizades;
 import controller.ControllerRemoveAmizade;
 import java.awt.Color;
@@ -23,11 +24,9 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.white);
         this.pnBatePapo.setBackground(new Color(242, 236, 228));
         
-        if(true) {
-            lbNome.setVisible(false);
-            btConversar.setVisible(false);
-        }
-        
+        lbNome.setVisible(false);
+        btConversar.setVisible(false);
+
         this.amizades = new ControllerListaAmizades().listar();
     }
     
@@ -185,7 +184,14 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     private void btConversarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConversarActionPerformed
         String nome = listAmigos.getSelectedValue();
         
-        new ViewJanelaConversa(nome).setVisible(true);
+        String ip = null;
+        try {
+            ip = new ControllerBuscaIp().getIp(nome);
+        } catch (IOException ex) {
+            Logger.getLogger(ViewTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        new ViewJanelaConversa(nome, ip).setVisible(true);
     }//GEN-LAST:event_btConversarActionPerformed
 
     private void listAmigosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listAmigosKeyPressed
@@ -210,7 +216,8 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
 
 
     public void atualizaListModel() {
-        this.listAmigos.setModel(this.listModel);
+//        this.listAmigos.setModel(this.listModel);
+        this.listAmigos.updateUI();
     }
 
 }

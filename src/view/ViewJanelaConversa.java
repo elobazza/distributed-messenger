@@ -2,8 +2,6 @@ package view;
 
 import controller.ControllerConversa;
 import java.awt.Color;
-import java.util.ArrayList;
-import model.ModelAmizade;
 
 /**
  *
@@ -11,21 +9,17 @@ import model.ModelAmizade;
  */
 public class ViewJanelaConversa extends javax.swing.JFrame {
     
-    private ListModelConversa listModel = new ListModelConversa();
-    ArrayList<String> mensagens;
-    
-    public ViewJanelaConversa(String nome) {
+    private ControllerConversa controller;
+    private ListModelConversa listModel;
+
+    public ViewJanelaConversa(String nome, String ip) {
+        this.controller = new ControllerConversa(ip);
         initComponents();
         this.getContentPane().setBackground(new Color(242, 236, 228));
         this.pnChat.setBackground(Color.white);
         lbNome.setText(nome);
         
-        this.mensagens = ControllerConversa.getInstance().getMensagens();
-        
-    }
-    
-    public void atualizaListModel() {
-        this.chat.setModel(this.listModel);
+        this.listModel = new ListModelConversa(this.controller);
     }
 
     @SuppressWarnings("unchecked")
@@ -69,7 +63,8 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        chat.setModel(new ListModelConversa());
+        chat.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        chat.setModel(new ListModelConversa(this.controller));
         chat.setBackground(new Color(242, 236, 228));
         jScrollPane1.setViewportView(chat);
 
@@ -107,8 +102,7 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
         String novaMensagem = tfMensagem.getText();
-        ControllerConversa.getInstance().addMensagem(novaMensagem);
-        
+        this.controller.addMensagem(novaMensagem);
         tfMensagem.setText("");
         
         atualizaListModel();
@@ -122,4 +116,9 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
     private javax.swing.JPanel pnChat;
     private javax.swing.JTextField tfMensagem;
     // End of variables declaration//GEN-END:variables
+    
+    public void atualizaListModel() {
+        this.chat.updateUI();
+    }
+
 }

@@ -1,22 +1,27 @@
 package view;
 
 import controller.ControllerConversa;
-import javax.swing.DefaultListModel;
+import javax.swing.AbstractListModel;
 
 /**
  * @author Eloisa e Maria Eduarda
  */
-public class ListModelConversa extends DefaultListModel<String> {
+public class ListModelConversa extends AbstractListModel<String> {
     
-    public ListModelConversa() {}
+    private ControllerConversa controller;
+    
+    public ListModelConversa(ControllerConversa controller) {
+        this.controller = controller;
+    }
     
     @Override
     public int getSize() {
-        return ControllerConversa.getInstance().getQtdMensagens();
+        return this.controller.getQtdMensagens();
     }
 
     @Override
     public String getElementAt(int index) {
-        return ControllerConversa.getInstance().getMensagem(index);
-    }    
+        return this.controller.getMensagem(index);
+    }
+    
 }
