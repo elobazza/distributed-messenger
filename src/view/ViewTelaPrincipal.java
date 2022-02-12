@@ -187,11 +187,12 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         String ip = null;
         try {
             ip = new ControllerBuscaIp().getIp(nome);
+            new ViewJanelaConversa(nome, ip).setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(ViewTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        new ViewJanelaConversa(nome, ip).setVisible(true);
+        
     }//GEN-LAST:event_btConversarActionPerformed
 
     private void listAmigosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listAmigosKeyPressed

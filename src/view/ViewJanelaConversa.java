@@ -1,25 +1,33 @@
 package view;
 
+import sockets.Sender;
 import controller.ControllerConversa;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingWorker;
+import sockets.Receiver;
 
 /**
- *
  * @author Eloisa e Maria Eduarda
  */
-public class ViewJanelaConversa extends javax.swing.JFrame {
+public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceViewObserver {
     
     private ControllerConversa controller;
     private ListModelConversa listModel;
 
-    public ViewJanelaConversa(String nome, String ip) {
+    public ViewJanelaConversa(String nome, String ip) throws IOException {
         this.controller = new ControllerConversa(ip);
         initComponents();
+        
         this.getContentPane().setBackground(new Color(242, 236, 228));
         this.pnChat.setBackground(Color.white);
         lbNome.setText(nome);
         
         this.listModel = new ListModelConversa(this.controller);
+        this.controller.addObserver(this);
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +42,11 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
         chat = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btEnviar.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         btEnviar.setText("Enviar");
@@ -102,11 +115,34 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
         String novaMensagem = tfMensagem.getText();
-        this.controller.addMensagem(novaMensagem);
-        tfMensagem.setText("");
         
+        this.controller.addMensagem(novaMensagem);
+        Sender sender = new Sender(controller.getIp(), 5050, novaMensagem);
+        
+        new Thread(() -> {
+            sender.run();
+        }).start();
+        
+        tfMensagem.setText("");
         atualizaListModel();
+        
+        try {
+            sender.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ViewJanelaConversa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btEnviarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try {
+            Receiver receiver = new Receiver(5051, this.controller);
+            new Thread(() -> {
+                receiver.run();
+            }).start();
+        } catch (IOException ex) {
+            Logger.getLogger(ViewJanelaConversa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowOpened
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEnviar;
@@ -120,5 +156,4 @@ public class ViewJanelaConversa extends javax.swing.JFrame {
     public void atualizaListModel() {
         this.chat.updateUI();
     }
-
 }

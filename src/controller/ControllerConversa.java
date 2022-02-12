@@ -1,18 +1,23 @@
 package controller;
 
 import java.util.ArrayList;
+import view.InterfaceViewObserver;
 
 /**
  * @author Eloisa e Maria Eduarda
  */
-public class ControllerConversa {
+public class ControllerConversa implements InterfaceControllerObserved {
     
     private ArrayList<String> mensagens;
     private String ipContato;
+    private int porta;
+    
+    private final ArrayList<InterfaceViewObserver> observers;
 
     public ControllerConversa(String ipContato) {
         mensagens = new ArrayList<>();
         this.ipContato = ipContato;
+        this.observers = new ArrayList<>();
     }
     
     public void addMensagem(String mensagem) {
@@ -31,4 +36,25 @@ public class ControllerConversa {
         return mensagens;
     }
     
+    public int getPorta() {
+        return 5050;
+    }
+    
+    public String getIp() {
+        return this.ipContato;
+    }
+
+    public void addObserver(InterfaceViewObserver observer) {
+        this.observers.add(observer);
+    }
+
+    public void removeObserver(InterfaceViewObserver observer) {
+        this.observers.remove(observer);
+    }
+    
+    public synchronized void notifyListModelChanged() {
+        for (InterfaceViewObserver observer : this.observers) {
+            observer.atualizaListModel();
+        }
+    }
 }
