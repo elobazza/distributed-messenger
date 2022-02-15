@@ -45,13 +45,11 @@ public class Receiver extends Connection {
 
                     String mensagem = new String(dadosBrutos, 0, qtdBytesLidos);
 
-                    System.out.println(mensagem + " : " + porta);
-
                     this.updateUiWithMessage(mensagem);
 
                     System.out.println(mensagem);
                 } catch (SocketException se) {
-                    System.out.println("ERRO");
+                    System.out.println("Fechou o server");
                 }
             }
         } catch (IOException ex) {

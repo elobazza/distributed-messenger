@@ -32,12 +32,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btLogin" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfLogin" max="32767" attributes="0"/>
-                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="tfLogin" max="32767" attributes="0"/>
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="90" max="32767" attributes="0"/>
           </Group>
@@ -84,9 +82,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfLogin">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="elobazza"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -119,9 +114,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="tfSenha">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="elo"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

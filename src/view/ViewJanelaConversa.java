@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sockets.Receiver;
@@ -131,7 +130,7 @@ public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceV
         if(!novaMensagem.equals("")) {
             this.controller.addMensagem("Você: " + novaMensagem);
             tfMensagem.setText("");
-            Sender sender = new Sender(controller.getIp(), 8080, novaMensagem, this);
+            Sender sender = new Sender(controller.getIp(), this.controller.getPorta(), novaMensagem, this);
             new Thread(() -> {
                 sender.run();
             }).start();
@@ -142,7 +141,7 @@ public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceV
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            this.receiver = new Receiver(8081, this.controller);
+            this.receiver = new Receiver(this.controller.getPorta(), this.controller);
             new Thread(() -> {
                 receiver.run();
             }).start();
