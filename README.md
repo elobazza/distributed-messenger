@@ -1,13 +1,13 @@
 # Distributed Messenger 👨‍👨‍👧
 Sistema de chat utilizando sockets desenvolvido para a disciplina de Sistemas Paralelos e Distribuídos
 
-**Descrição**
+**Descrição 📍**
 
 O projeto consiste num sistema de chat implementado para funcionar de forma distribuída, utilizando threads e sockets. No sistema em questão, o usuário tem a opção de se cadastrar e realizar o login. Depois de acessar o sistema em si, o usuário pode montar sua lista de amizade, ou seja, os contatos, através do IP dos amigos, depois de adicionar, também é possível realizar a remoção desses amigos/contatos.
 
 Ademais, ele ainda terá a possibilidade de abrir conversas com cada um desses amigos, ao fazer isso, são abertas janelas de chat para cada bate-papo, que funcionarão simultaneamente através de threads. A comunicação será inteiramente feita no formato cliente-cliente. Cada usuário terá seus dados gravados num arquivo localmente e também um arquivo que armazena suas amizades/contatos.
 
-**Requisitos Funcionais**
+**Requisitos Funcionais 📜**
 
 - O sistema deve permitir o gerenciamento de usuários
 - O sistema deve permitir o login de usuários
@@ -15,7 +15,7 @@ Ademais, ele ainda terá a possibilidade de abrir conversas com cada um desses a
 - O sistema deve permitir remover um contato
 - O sistema deve permitir troca de mensagens entre usuários
 
-**Requisitos Não Funcionais**
+**Requisitos Não Funcionais 📜**
 
 - Deve ser distribuído e executar simultanamente em no mínimo 3 clientes (hosts) diferentes
 - Não se deve utilizar nenhuma implementação pronta de qualquer servidor
@@ -23,7 +23,7 @@ Ademais, ele ainda terá a possibilidade de abrir conversas com cada um desses a
 - Sockets ociosos não podem existir (todos devem ser fechados logo após a comunicação)
 - A aplicação cliente deve ter interface gráfica
 
-**Instruções de Uso 📜** 
+**Instruções de Uso 📚** 
 
 Ao acessar o sistema pela primeira vez, o usuário deve cadastrar-se. Nas demais vezes, basta realizar o login com o username e a senha escolhidos. Quando é realizado o cadastro ou o login, o usuário é redirecionado para a página principal do sistema que possui a lista de amigos e as opções de adicionar ou remover. 
 
