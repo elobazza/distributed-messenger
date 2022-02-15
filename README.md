@@ -31,6 +31,6 @@ Ao clicar na opção de Adicionar, surge a tela de cadastro de amizade, onde dev
 
 Ao selecionar uma amizade, surge um botão Conversar na página principal, ao clicar nesse botão, é aberto uma janela de conversa com o amigo selecionado. Para que a comunicação funcione, o amigo também deve estar com a janela de conversa aberta e deve ter cadastrado a mesma porta, bem como o ip de quem deseja conversar, e claro, devem estar na mesma rede.
 
-**Estudantes**
+**Estudantes 👩🏼‍🤝‍👩🏻**
 
 Eloísa Bazzanella e Maria Eduarda Buzana
