@@ -3,10 +3,12 @@ package view;
 import sockets.Sender;
 import controller.ControllerConversa;
 import java.awt.Color;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.IOException;
+import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.SwingWorker;
 import sockets.Receiver;
 
 /**
@@ -16,9 +18,10 @@ public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceV
     
     private ControllerConversa controller;
     private ListModelConversa listModel;
+    private Receiver receiver;
 
-    public ViewJanelaConversa(String nome, String ip) throws IOException {
-        this.controller = new ControllerConversa(ip);
+    public ViewJanelaConversa(String nome, String ip, int porta) throws IOException {
+        this.controller = new ControllerConversa(nome, ip, porta);
         initComponents();
         
         this.getContentPane().setBackground(new Color(242, 236, 228));
@@ -43,6 +46,9 @@ public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceV
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -80,6 +86,12 @@ public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceV
         chat.setModel(new ListModelConversa(this.controller));
         chat.setBackground(new Color(242, 236, 228));
         jScrollPane1.setViewportView(chat);
+        jScrollPane1.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {
+            public void adjustmentValueChanged(AdjustmentEvent e) {
+                e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+            }
+        });
+        jScrollPane1.setAutoscrolls(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,27 +127,22 @@ public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceV
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
         String novaMensagem = tfMensagem.getText();
-        
-        this.controller.addMensagem(novaMensagem);
-        Sender sender = new Sender(controller.getIp(), 5050, novaMensagem);
-        
-        new Thread(() -> {
-            sender.run();
-        }).start();
-        
-        tfMensagem.setText("");
-        atualizaListModel();
-        
-        try {
-            sender.close();
-        } catch (IOException ex) {
-            Logger.getLogger(ViewJanelaConversa.class.getName()).log(Level.SEVERE, null, ex);
+         
+        if(!novaMensagem.equals("")) {
+            this.controller.addMensagem("Você: " + novaMensagem);
+            tfMensagem.setText("");
+            Sender sender = new Sender(controller.getIp(), 8080, novaMensagem, this);
+            new Thread(() -> {
+                sender.run();
+            }).start();
+
+            atualizaListModel();
         }
     }//GEN-LAST:event_btEnviarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            Receiver receiver = new Receiver(5051, this.controller);
+            this.receiver = new Receiver(8081, this.controller);
             new Thread(() -> {
                 receiver.run();
             }).start();
@@ -143,6 +150,14 @@ public class ViewJanelaConversa extends javax.swing.JFrame implements InterfaceV
             Logger.getLogger(ViewJanelaConversa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        try {
+            this.receiver.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ViewJanelaConversa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btEnviar;

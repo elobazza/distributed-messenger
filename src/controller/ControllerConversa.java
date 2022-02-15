@@ -9,15 +9,19 @@ import view.InterfaceViewObserver;
 public class ControllerConversa implements InterfaceControllerObserved {
     
     private ArrayList<String> mensagens;
+    private String nomeContato;
     private String ipContato;
     private int porta;
     
     private final ArrayList<InterfaceViewObserver> observers;
 
-    public ControllerConversa(String ipContato) {
-        mensagens = new ArrayList<>();
-        this.ipContato = ipContato;
+    public ControllerConversa(String nomeContato, String ipContato, int porta) {
+        this.mensagens = new ArrayList<>();
         this.observers = new ArrayList<>();
+        
+        this.nomeContato = nomeContato;
+        this.ipContato   = ipContato;
+        this.porta       = porta;
     }
     
     public void addMensagem(String mensagem) {
@@ -37,11 +41,15 @@ public class ControllerConversa implements InterfaceControllerObserved {
     }
     
     public int getPorta() {
-        return 5050;
+        return this.porta;
     }
     
     public String getIp() {
         return this.ipContato;
+    }
+    
+    public String getNome() {
+        return this.nomeContato;
     }
 
     public void addObserver(InterfaceViewObserver observer) {

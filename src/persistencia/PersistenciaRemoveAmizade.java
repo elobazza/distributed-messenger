@@ -22,7 +22,7 @@ public class PersistenciaRemoveAmizade extends PersistenciaAmizadePadrao {
         String linha = this.getLeitor().readLine(); 
         while(linha != null) {
             String[] infos = linha.split("-");
-            ModelAmizade amizade = new ModelAmizade(infos[0], infos[1]);
+            ModelAmizade amizade = new ModelAmizade(infos[0], infos[1], Integer.parseInt(infos[2]));
             if(!amizade.getNome().equals(nome)) {
                 writer.write(linha);
                 writer.newLine();

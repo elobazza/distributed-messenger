@@ -18,7 +18,7 @@ public class ControllerCadastroAmizade {
         return persistencia;
     }
 
-    public void cadastrar(String nome, String ip) throws IOException {
-        this.getPersistencia().cadastrar(nome, ip);
+    public void cadastrar(String nome, String ip, int porta) throws IOException {
+        this.getPersistencia().cadastrar(nome, ip, porta);
     }
 }

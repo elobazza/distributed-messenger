@@ -7,12 +7,14 @@ public class ModelAmizade {
     
     private String nome;
     private String ip;
+    private int    porta;
     
     public ModelAmizade() {}
 
-    public ModelAmizade(String nome, String ip) {
-        this.nome = nome;
-        this.ip = ip;
+    public ModelAmizade(String nome, String ip, int porta) {
+        this.nome  = nome;
+        this.ip    = ip;
+        this.porta = porta;
     }
 
     public String getNome() {
@@ -29,5 +31,13 @@ public class ModelAmizade {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public int getPorta() {
+        return porta;
+    }
+
+    public void setPorta(int porta) {
+        this.porta = porta;
     }
 }

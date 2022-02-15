@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * @author Eloisa e Maria Eduarda 
  */
-public class PersistenciaAmizadePadrao {
+public abstract class PersistenciaAmizadePadrao {
 
     protected File arquivo = new File("src/database/amizades.txt");
     

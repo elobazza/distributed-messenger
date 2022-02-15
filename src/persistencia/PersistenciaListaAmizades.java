@@ -19,7 +19,7 @@ public class PersistenciaListaAmizades extends PersistenciaAmizadePadrao {
         while(linha != null) {
             
             String[] infos = linha.split("-");
-            ModelAmizade amizade = new ModelAmizade(infos[0], infos[1]);
+            ModelAmizade amizade = new ModelAmizade(infos[0], infos[1], Integer.parseInt(infos[2]));
             amizades.add(amizade);
             
             linha = this.getLeitor().readLine(); 

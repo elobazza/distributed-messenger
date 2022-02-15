@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * @author Eloisa e Maria Eduarda
  */
-public class PersistenciaUsuarioPadrao {
+public abstract class PersistenciaUsuarioPadrao {
 
     private File arquivo = new File("src/database/usuario.txt");
     

@@ -13,8 +13,8 @@ import model.ModelAmizade;
  */
 public class PersistenciaCadastroAmizade extends PersistenciaAmizadePadrao {
  
-    public void cadastrar (String nome, String ip) throws IOException {
-        String retorno = nome + "-" + ip;
+    public void cadastrar (String nome, String ip, int porta) throws IOException {
+        String retorno = nome + "-" + ip + "-" + porta;
         
         
         this.iniciaLeitor();
@@ -25,7 +25,7 @@ public class PersistenciaCadastroAmizade extends PersistenciaAmizadePadrao {
         String linha = this.getLeitor().readLine(); 
         while(linha != null) {
             String[] infos = linha.split("-");
-            ModelAmizade amizade = new ModelAmizade(infos[0], infos[1]);
+            ModelAmizade amizade = new ModelAmizade(infos[0], infos[1], Integer.parseInt(infos[2]));
             writer.write(linha);
             writer.newLine();
             linha = this.getLeitor().readLine(); 

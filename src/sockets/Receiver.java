@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
 /**
  * @author Eloisa e Maria Eduarda
@@ -15,6 +17,7 @@ public class Receiver extends Connection {
         
     private int porta;
     private ControllerConversa controller;
+    private ServerSocket server;
     
     public Receiver(int porta, ControllerConversa controller) throws IOException{
         this.porta = porta;
@@ -23,27 +26,55 @@ public class Receiver extends Connection {
     
     @Override
     public void run() {
-        try ( ServerSocket ss = new ServerSocket(porta)) /* try-with */ {
-            System.out.println("Esperando conexão");
-//            ss.setReuseAddress(true);
+        try {
+            this.server = new ServerSocket(porta);
             
-            try ( Socket conn = ss.accept()) {
-                System.out.println("Conexão recebida de: " + conn.getInetAddress().getHostAddress());
+            System.out.println("Esperando conexão");
+            
+            while (!this.server.isClosed()) {
                 
-                InputStream inputStream = conn.getInputStream();
+                Socket conn = null;
+                try {
+                    conn = this.server.accept();
+                    System.out.println("Conexão recebida de: " + conn.getInetAddress().getHostAddress());
 
-                byte[] dadosBrutos = new byte[1024];
-                int qtdBytesLidos = inputStream.read(dadosBrutos);
+                    InputStream inputStream = conn.getInputStream();
 
-                String mensagem = new String(dadosBrutos, 0, qtdBytesLidos);
-                
-                controller.addMensagem(mensagem);
-                controller.notifyListModelChanged();
-                
-                System.out.println(mensagem);
+                    byte[] dadosBrutos = new byte[1024];
+                    int qtdBytesLidos = inputStream.read(dadosBrutos);
+
+                    String mensagem = new String(dadosBrutos, 0, qtdBytesLidos);
+
+                    System.out.println(mensagem + " : " + porta);
+
+                    this.updateUiWithMessage(mensagem);
+
+                    System.out.println(mensagem);
+                } catch (SocketException se) {
+                    System.out.println("ERRO");
+                }
             }
         } catch (IOException ex) {
             Logger.getLogger(Receiver.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void updateUiWithMessage(String message) {
+        new Thread() {
+            @Override
+            public void run() {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        controller.addMensagem(controller.getNome()+ ": " + message);
+                        controller.notifyListModelChanged();
+                    }
+                });
+            }
+        }.start();
+    }
+    
+    public void close() throws IOException {
+        this.server.close(); 
     }
 }

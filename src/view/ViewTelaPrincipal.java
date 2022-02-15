@@ -1,6 +1,6 @@
 package view;
 
-import controller.ControllerBuscaIp;
+import controller.ControllerBuscaAmizade;
 import controller.ControllerListaAmizades;
 import controller.ControllerRemoveAmizade;
 import java.awt.Color;
@@ -185,9 +185,11 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         String nome = listAmigos.getSelectedValue();
         
         String ip = null;
+        int porta = 0;
         try {
-            ip = new ControllerBuscaIp().getIp(nome);
-            new ViewJanelaConversa(nome, ip).setVisible(true);
+            ip = new ControllerBuscaAmizade().getIp(nome);
+            porta = new ControllerBuscaAmizade().getPorta(nome);
+            new ViewJanelaConversa(nome, ip, porta).setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(ViewTelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
