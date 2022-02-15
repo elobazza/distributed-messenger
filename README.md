@@ -25,6 +25,8 @@ Ademais, ele ainda terá a possibilidade de abrir conversas com cada um desses a
 
 **Instruções de Uso 📚** 
 
+Para executar o projeto, basta baixar o diretório `/exe`, nele contém um aquivo `.jar` da aplicação e uma pasta já com os arquivos que servem como banco de dados, basta clicar no arquivo `.jar` e sistema será inicializado.
+
 Ao acessar o sistema pela primeira vez, o usuário deve cadastrar-se. Nas demais vezes, basta realizar o login com o username e a senha escolhidos. Quando é realizado o cadastro ou o login, o usuário é redirecionado para a página principal do sistema que possui a lista de amigos e as opções de adicionar ou remover. 
 
 Ao clicar na opção de Adicionar, surge a tela de cadastro de amizade, onde deve ser informado o nome para o contato, o ip e a porta pela qual vão se comunicar. Ao cadastrar a nova amizade, a lista de amizades é atualizada na página principal. Ao selecionar um amigo e clicar no botão de remover, surge uma mensagem de confirmação para esse processo de remoção, o usuário tem a opção de cancelar a operação ou confirmar a remoção, depois disso é atualizado a lista de amigos da página principal.
